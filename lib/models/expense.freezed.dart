@@ -25,7 +25,14 @@ mixin _$Expense {
   double get amount => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
+  String? get description =>
+      throw _privateConstructorUsedError; // NEW OPTIONAL FIELDS (backward compatible)
+  List<String> get tags => throw _privateConstructorUsedError;
+  bool get isPaid => throw _privateConstructorUsedError;
+  String get priority => throw _privateConstructorUsedError;
+  bool get isFavorite => throw _privateConstructorUsedError;
+  String? get location => throw _privateConstructorUsedError;
+  String? get notes => throw _privateConstructorUsedError;
 
   /// Serializes this Expense to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,7 +54,13 @@ abstract class $ExpenseCopyWith<$Res> {
       double amount,
       String category,
       DateTime date,
-      String? description});
+      String? description,
+      List<String> tags,
+      bool isPaid,
+      String priority,
+      bool isFavorite,
+      String? location,
+      String? notes});
 }
 
 /// @nodoc
@@ -71,6 +84,12 @@ class _$ExpenseCopyWithImpl<$Res, $Val extends Expense>
     Object? category = null,
     Object? date = null,
     Object? description = freezed,
+    Object? tags = null,
+    Object? isPaid = null,
+    Object? priority = null,
+    Object? isFavorite = null,
+    Object? location = freezed,
+    Object? notes = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -97,6 +116,30 @@ class _$ExpenseCopyWithImpl<$Res, $Val extends Expense>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      tags: null == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      isPaid: null == isPaid
+          ? _value.isPaid
+          : isPaid // ignore: cast_nullable_to_non_nullable
+              as bool,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as String,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -114,7 +157,13 @@ abstract class _$$ExpenseImplCopyWith<$Res> implements $ExpenseCopyWith<$Res> {
       double amount,
       String category,
       DateTime date,
-      String? description});
+      String? description,
+      List<String> tags,
+      bool isPaid,
+      String priority,
+      bool isFavorite,
+      String? location,
+      String? notes});
 }
 
 /// @nodoc
@@ -136,6 +185,12 @@ class __$$ExpenseImplCopyWithImpl<$Res>
     Object? category = null,
     Object? date = null,
     Object? description = freezed,
+    Object? tags = null,
+    Object? isPaid = null,
+    Object? priority = null,
+    Object? isFavorite = null,
+    Object? location = freezed,
+    Object? notes = freezed,
   }) {
     return _then(_$ExpenseImpl(
       id: null == id
@@ -162,6 +217,30 @@ class __$$ExpenseImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      tags: null == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      isPaid: null == isPaid
+          ? _value.isPaid
+          : isPaid // ignore: cast_nullable_to_non_nullable
+              as bool,
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as String,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -175,7 +254,14 @@ class _$ExpenseImpl implements _Expense {
       required this.amount,
       required this.category,
       required this.date,
-      this.description});
+      this.description,
+      final List<String> tags = const [],
+      this.isPaid = false,
+      this.priority = 'medium',
+      this.isFavorite = false,
+      this.location,
+      this.notes})
+      : _tags = tags;
 
   factory _$ExpenseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ExpenseImplFromJson(json);
@@ -192,10 +278,34 @@ class _$ExpenseImpl implements _Expense {
   final DateTime date;
   @override
   final String? description;
+// NEW OPTIONAL FIELDS (backward compatible)
+  final List<String> _tags;
+// NEW OPTIONAL FIELDS (backward compatible)
+  @override
+  @JsonKey()
+  List<String> get tags {
+    if (_tags is EqualUnmodifiableListView) return _tags;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tags);
+  }
+
+  @override
+  @JsonKey()
+  final bool isPaid;
+  @override
+  @JsonKey()
+  final String priority;
+  @override
+  @JsonKey()
+  final bool isFavorite;
+  @override
+  final String? location;
+  @override
+  final String? notes;
 
   @override
   String toString() {
-    return 'Expense(id: $id, title: $title, amount: $amount, category: $category, date: $date, description: $description)';
+    return 'Expense(id: $id, title: $title, amount: $amount, category: $category, date: $date, description: $description, tags: $tags, isPaid: $isPaid, priority: $priority, isFavorite: $isFavorite, location: $location, notes: $notes)';
   }
 
   @override
@@ -210,13 +320,34 @@ class _$ExpenseImpl implements _Expense {
                 other.category == category) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
+            (identical(other.isPaid, isPaid) || other.isPaid == isPaid) &&
+            (identical(other.priority, priority) ||
+                other.priority == priority) &&
+            (identical(other.isFavorite, isFavorite) ||
+                other.isFavorite == isFavorite) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            (identical(other.notes, notes) || other.notes == notes));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, title, amount, category, date, description);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      title,
+      amount,
+      category,
+      date,
+      description,
+      const DeepCollectionEquality().hash(_tags),
+      isPaid,
+      priority,
+      isFavorite,
+      location,
+      notes);
 
   /// Create a copy of Expense
   /// with the given fields replaced by the non-null parameter values.
@@ -241,7 +372,13 @@ abstract class _Expense implements Expense {
       required final double amount,
       required final String category,
       required final DateTime date,
-      final String? description}) = _$ExpenseImpl;
+      final String? description,
+      final List<String> tags,
+      final bool isPaid,
+      final String priority,
+      final bool isFavorite,
+      final String? location,
+      final String? notes}) = _$ExpenseImpl;
 
   factory _Expense.fromJson(Map<String, dynamic> json) = _$ExpenseImpl.fromJson;
 
@@ -256,7 +393,19 @@ abstract class _Expense implements Expense {
   @override
   DateTime get date;
   @override
-  String? get description;
+  String? get description; // NEW OPTIONAL FIELDS (backward compatible)
+  @override
+  List<String> get tags;
+  @override
+  bool get isPaid;
+  @override
+  String get priority;
+  @override
+  bool get isFavorite;
+  @override
+  String? get location;
+  @override
+  String? get notes;
 
   /// Create a copy of Expense
   /// with the given fields replaced by the non-null parameter values.

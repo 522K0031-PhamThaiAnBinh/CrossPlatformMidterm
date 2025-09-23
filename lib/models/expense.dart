@@ -12,6 +12,14 @@ class Expense with _$Expense {
     required String category,
     required DateTime date,
     String? description,
+    
+    // NEW OPTIONAL FIELDS (backward compatible)
+    @Default([]) List<String> tags,
+    @Default(false) bool isPaid,
+    @Default('medium') String priority,
+    @Default(false) bool isFavorite,
+    String? location,
+    String? notes,
   }) = _Expense;
 
   factory Expense.fromJson(Map<String, dynamic> json) => _$ExpenseFromJson(json);

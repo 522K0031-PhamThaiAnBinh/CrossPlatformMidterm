@@ -42,7 +42,300 @@ final expensesByCategoryProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ExpensesByCategoryRef = AutoDisposeProviderRef<Map<String, double>>;
-String _$expenseNotifierHash() => r'9f7c951ecc271650924fe2da999b7fb940fe872b';
+String _$totalExpensesThisMonthHash() =>
+    r'd04094144b5dc4f6bfc74073106769b1215371c3';
+
+/// See also [totalExpensesThisMonth].
+@ProviderFor(totalExpensesThisMonth)
+final totalExpensesThisMonthProvider = AutoDisposeProvider<double>.internal(
+  totalExpensesThisMonth,
+  name: r'totalExpensesThisMonthProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$totalExpensesThisMonthHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef TotalExpensesThisMonthRef = AutoDisposeProviderRef<double>;
+String _$expensesByPriorityHash() =>
+    r'a7ec7d090beefabef67f855b3c567f566f30a667';
+
+/// Copied from Dart SDK
+class _SystemHash {
+  _SystemHash._();
+
+  static int combine(int hash, int value) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + value);
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
+    return hash ^ (hash >> 6);
+  }
+
+  static int finish(int hash) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
+    // ignore: parameter_assignments
+    hash = hash ^ (hash >> 11);
+    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+  }
+}
+
+/// See also [expensesByPriority].
+@ProviderFor(expensesByPriority)
+const expensesByPriorityProvider = ExpensesByPriorityFamily();
+
+/// See also [expensesByPriority].
+class ExpensesByPriorityFamily extends Family<List<Expense>> {
+  /// See also [expensesByPriority].
+  const ExpensesByPriorityFamily();
+
+  /// See also [expensesByPriority].
+  ExpensesByPriorityProvider call(
+    String priority,
+  ) {
+    return ExpensesByPriorityProvider(
+      priority,
+    );
+  }
+
+  @override
+  ExpensesByPriorityProvider getProviderOverride(
+    covariant ExpensesByPriorityProvider provider,
+  ) {
+    return call(
+      provider.priority,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'expensesByPriorityProvider';
+}
+
+/// See also [expensesByPriority].
+class ExpensesByPriorityProvider extends AutoDisposeProvider<List<Expense>> {
+  /// See also [expensesByPriority].
+  ExpensesByPriorityProvider(
+    String priority,
+  ) : this._internal(
+          (ref) => expensesByPriority(
+            ref as ExpensesByPriorityRef,
+            priority,
+          ),
+          from: expensesByPriorityProvider,
+          name: r'expensesByPriorityProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$expensesByPriorityHash,
+          dependencies: ExpensesByPriorityFamily._dependencies,
+          allTransitiveDependencies:
+              ExpensesByPriorityFamily._allTransitiveDependencies,
+          priority: priority,
+        );
+
+  ExpensesByPriorityProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.priority,
+  }) : super.internal();
+
+  final String priority;
+
+  @override
+  Override overrideWith(
+    List<Expense> Function(ExpensesByPriorityRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: ExpensesByPriorityProvider._internal(
+        (ref) => create(ref as ExpensesByPriorityRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        priority: priority,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<List<Expense>> createElement() {
+    return _ExpensesByPriorityProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ExpensesByPriorityProvider && other.priority == priority;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, priority.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin ExpensesByPriorityRef on AutoDisposeProviderRef<List<Expense>> {
+  /// The parameter `priority` of this provider.
+  String get priority;
+}
+
+class _ExpensesByPriorityProviderElement
+    extends AutoDisposeProviderElement<List<Expense>>
+    with ExpensesByPriorityRef {
+  _ExpensesByPriorityProviderElement(super.provider);
+
+  @override
+  String get priority => (origin as ExpensesByPriorityProvider).priority;
+}
+
+String _$unpaidExpensesHash() => r'e8a6268a17c65f089644263b28d03661435b5fb5';
+
+/// See also [unpaidExpenses].
+@ProviderFor(unpaidExpenses)
+final unpaidExpensesProvider = AutoDisposeProvider<List<Expense>>.internal(
+  unpaidExpenses,
+  name: r'unpaidExpensesProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$unpaidExpensesHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef UnpaidExpensesRef = AutoDisposeProviderRef<List<Expense>>;
+String _$favoriteExpensesHash() => r'6ffe6d6771ba26767da16715700a786b9623c12e';
+
+/// See also [favoriteExpenses].
+@ProviderFor(favoriteExpenses)
+final favoriteExpensesProvider = AutoDisposeProvider<List<Expense>>.internal(
+  favoriteExpenses,
+  name: r'favoriteExpensesProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$favoriteExpensesHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef FavoriteExpensesRef = AutoDisposeProviderRef<List<Expense>>;
+String _$monthlySpendingTrendHash() =>
+    r'e9fd8cc37d1135791f0fb4b2e3487c0f044f6299';
+
+/// See also [monthlySpendingTrend].
+@ProviderFor(monthlySpendingTrend)
+final monthlySpendingTrendProvider =
+    AutoDisposeProvider<Map<String, double>>.internal(
+  monthlySpendingTrend,
+  name: r'monthlySpendingTrendProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$monthlySpendingTrendHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef MonthlySpendingTrendRef = AutoDisposeProviderRef<Map<String, double>>;
+String _$availableTagsHash() => r'52d9e448f60c93db940435ca933f403b8f19e49d';
+
+/// See also [availableTags].
+@ProviderFor(availableTags)
+final availableTagsProvider = AutoDisposeProvider<List<String>>.internal(
+  availableTags,
+  name: r'availableTagsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$availableTagsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AvailableTagsRef = AutoDisposeProviderRef<List<String>>;
+String _$expenseCountHash() => r'ca9d268c989a7968eabc5b3ae0829a9842459344';
+
+/// See also [expenseCount].
+@ProviderFor(expenseCount)
+final expenseCountProvider = AutoDisposeProvider<int>.internal(
+  expenseCount,
+  name: r'expenseCountProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$expenseCountHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef ExpenseCountRef = AutoDisposeProviderRef<int>;
+String _$averageExpenseAmountHash() =>
+    r'433808deced9a49e9ccf6ac1bc96477b1e44783b';
+
+/// See also [averageExpenseAmount].
+@ProviderFor(averageExpenseAmount)
+final averageExpenseAmountProvider = AutoDisposeProvider<double>.internal(
+  averageExpenseAmount,
+  name: r'averageExpenseAmountProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$averageExpenseAmountHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AverageExpenseAmountRef = AutoDisposeProviderRef<double>;
+String _$topSpendingCategoryHash() =>
+    r'd97917e1d660bdfa38cceddc65c5e44af0bfb10e';
+
+/// See also [topSpendingCategory].
+@ProviderFor(topSpendingCategory)
+final topSpendingCategoryProvider = AutoDisposeProvider<String>.internal(
+  topSpendingCategory,
+  name: r'topSpendingCategoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$topSpendingCategoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef TopSpendingCategoryRef = AutoDisposeProviderRef<String>;
+String _$expenseNotifierHash() => r'bf2c5124e48b33c41331ca8a33e7c2604f2b174d';
 
 /// See also [ExpenseNotifier].
 @ProviderFor(ExpenseNotifier)
